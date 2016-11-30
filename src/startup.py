@@ -71,6 +71,9 @@ def user(username = None):
 @app.route('/bookmark', methods=['GET', 'POST'])
 def bookmark(username = None):
 	if request.method=='POST':
+		f = request.files['datafile']
+		f.save('static/uploads/' + title + '.png')
+	
 		username = request.form['username']
 		password = request.form['password']
 		
@@ -85,9 +88,6 @@ def bookmark(username = None):
 			author = request.form['author']
 			page = request.form['page']
 			line = request.form['line']
-			
-			f = request.files['datafile']
-			f.save('static/uploads/' + title + '.png')
 			
 			conb = sql.connect("books.db")
 			curb = conb.cursor()
