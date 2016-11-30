@@ -1,0 +1,48 @@
+{% extends "home.html" %}
+{% block content %}
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Login</h1>
+				<p>Please enter your username and password to continue. If you dont have a username please register one.</p>
+			</div>
+		</div>
+
+		<div class="container">
+			<!-- Example row of columns -->
+			<div class="row">
+				<div class="col-md-4">
+					<h2>Login</h2>
+					<form action="/username/" method="POST">
+						Username:<br>
+						<input type="text" name="username" value="{{username}}" value="{{ request.form.username }}>
+						<br>
+						Password:<br>
+						<input type="text" name="password" value="{{ request.form.password }}">
+						<br><br>
+						<input type="login" value="Login">
+					</form> 
+
+				</div>
+				
+				<div class="col-md-4">
+					<h2>Register</h2>
+					<form action="/register" method="POST">
+						Username:<br>
+						<input type="text" name="username"><br>
+						E-mail:<br>
+						<input type="text" name="email"><br>
+						Password:<br>
+						<input type="text" name="password"><br>
+						Confirm Password:<br>
+						<input type="text" name="cpassword">
+						<br><br>
+						<input type="register" value="Register">
+					</form> 
+
+				</div>
+				
+			</div>
+		</div> <!-- /container -->
+	</body>
+</html>
+{% endblock %}

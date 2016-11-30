@@ -1,0 +1,34 @@
+{% extends "home.html" %}
+{% block content %}
+		<div class="container">
+			<!-- Example row of columns -->
+			<div class="row">
+				<div class="col-md-4">
+					<h2>Back</h2>
+					<img src="{{ url_for('static', filename='img/backarrow.png') }}" alt="Image of Landscape">
+					<p><a class="btn btn-default" href="{{ url_for('gallery') }}" role="button">Back &raquo;</a></p>
+				</div>
+			
+				<div class="col-md-4">
+					<h2>Edinburgh Parliament</h2>
+					<img src="{{ url_for('static', filename='img/buildings/edinburgh_parliament_icon.jpg') }}" alt="Image of Landscape">
+					<p><a class="btn btn-default" href="#" role="button">View Image Info &raquo;</a></p>
+				</div>
+				
+				<div class="col-md-4">
+					<h2>Glass Sky</h2>
+					<img src="{{ url_for('static', filename='img/buildings/glass_sky_icon.jpg') }}" alt="Image of People">
+					<p><a class="btn btn-default" href="#" role="button">View Image Info &raquo;</a></p>
+				</div>
+				
+				<div class="col-md-4">
+					<h2>The Church</h2>
+					<img src="{{ url_for('static', filename='img/buildings/the_church_icon.jpg') }}" alt="Image of buildings">
+					<p><a class="btn btn-default" href="#" role="button">View Image Info &raquo;</a></p>
+				</div>
+				
+			</div>
+		</div> <!-- /container -->
+	</body>
+</html>
+{% endblock %}
