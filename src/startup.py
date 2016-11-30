@@ -11,7 +11,7 @@ def login():
 		con = sql.connect("users.db")
 		cur = con.cursor()
 		cur.execute('SELECT username from users WHERE username="%s" AND password="%s"' % (username, password))
-		user.encode('utf-8') = cur.fetchone()
+		user = cur.fetchone()
 		
 		con.commit()
 		
