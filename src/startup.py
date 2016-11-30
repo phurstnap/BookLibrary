@@ -151,6 +151,6 @@ if __name__ == ("__main__"):
 	logs(app)
 	app.run
 	(
-		host = app.config['ip_address'],
-		port = int(app.config['port'])
+		host=app.config['ip_address'],
+		port=int(app.config['port'])
 	)
