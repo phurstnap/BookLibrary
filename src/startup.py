@@ -1,4 +1,5 @@
-from flask import Flask, render_template, redirect, url_for, request, sqlite3
+from flask import Flask, render_template, redirect, url_for, request, g
+import sqlite3
 app = Flask(__name__)
 db_location = 'users.db'
 
