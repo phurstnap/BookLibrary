@@ -16,7 +16,7 @@ def login():
 		con.commit()
 		con.close()
 		
-		return render_template('user.html', user, password=None)
+		return render_template('user.html', id=None, user = user, password=None)
 	else:
 		return render_template('login.html')
 
