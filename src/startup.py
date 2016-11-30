@@ -61,7 +61,7 @@ def user(name = None):
 					</form>
 				</div>
 		'''
-	return render_template('user.html' name = name)
+	return render_template('user.html', name = name)
 	con.close()
 
 @app.route('/bookmark')
