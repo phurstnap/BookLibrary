@@ -26,7 +26,8 @@ def login():
 					return render_template('login.html')
 			else:
 				return render_template('login.html')
-			
+	except KeyError:
+		pass
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
