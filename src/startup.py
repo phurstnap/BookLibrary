@@ -23,7 +23,7 @@ def login():
 					session['name'] = user
 					return render_template('user.html', id=None, user = user, password=None)
 				else:
-				return render_template('login.html')
+					return render_template('login.html')
 			else:
 				return render_template('login.html')
 			
