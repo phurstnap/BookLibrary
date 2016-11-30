@@ -15,7 +15,7 @@ def login():
 		
 		con.commit()
 		con.close()
-		if c.fetchone() is not None:
+		if cur.fetchone() is not None:
 			session['name'] = user
 			return render_template('user.html', id=None, user = user, password=None)
 		else:
