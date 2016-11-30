@@ -1,7 +1,13 @@
-<html>
-	<body>
-		<p><h1>404 Error:</h1> <h2>Page not found.</h2></p>
-		<p>To head back to the main site please click the button below</p>
-		<a class="btn btn-default" href="{{ url_for('login') }}" role="button">Go to Login &raquo;</a>
+{% extends "main.html" %}
+{% block content %}
+<div class="jumbotron">
+			<div class="container">
+				<h1>404 Error: </h1><h2>Page not found.</h2>
+				<p>To head back to the main site please click the button below</p>
+				<a class="btn btn-default" href="{{ url_for('login') }}" role="button">Go to Login &raquo;</a>
+			</div>
+		</div>
+
 	</body>
 </html>
+{% endblock %}
