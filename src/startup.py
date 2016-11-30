@@ -11,12 +11,12 @@ def login():
 		con = sql.connect("users.db")
 		cur = con.cursor()
 		cur.execute('SELECT username from users WHERE username="%s" AND password="%s"' % (username, password))
-		user = cur.fetchone()
+		username = cur.fetchone()
 		
 		con.commit()
 		
 		if cur.fetchone() is not None:
-			return render_template('user.html',user = user)
+			return render_template('user.html',username = username)
 		else:
 			return render_template('login.html')
 		con.close()
@@ -39,7 +39,7 @@ def register():
 		return render_template('register.html')
 		
 @app.route('/user')
-def user(name = None):
+def user(username = None):
 	con = sql.connect("books.db")
 	cur = con.cursor()
 	for book in books:
@@ -61,7 +61,7 @@ def user(name = None):
 					</form>
 				</div>
 		'''
-	return render_template('user.html', username = name)
+	return render_template('user.html', username = username)
 	con.close()
 
 @app.route('/bookmark', methods=['GET', 'POST'])
