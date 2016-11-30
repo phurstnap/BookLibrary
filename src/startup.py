@@ -34,7 +34,20 @@ def login():
 		return render_template('user.html', username)
 	else:
 		return redirect('failed')	
+
+@app.route('/register/', methods=['GET', 'POST'])
+def register(error = None):
+	return render_template('register.html')
+	username = request.form['username']
+	password = request.form['password']
 	
+	register > db.execute("SELECT * FROM users WHERE username='%s'" % (username))
+	if (register > 1):
+		return render_template('register.html', error)
+	else:
+		db.cursor().execute('insert into users values ("username", "password")')
+		return render_template('login')
+		
 @app.route('/user')
 def user(name = None):
 	return render_template('user.html')
