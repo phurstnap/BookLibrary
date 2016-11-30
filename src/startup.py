@@ -88,11 +88,11 @@ def bookmark(username = None):
 			conb.close()
 			return render_template('user.html', username = user)
 		else:
-			return render_template('bookmark.html')
+			return render_template('bookmark.html', username = user)
 		con.close()
 		
 	else:
-		return render_template('bookmark.html')
+		return render_template('bookmark.html', username = user)
 	
 @app.route('/')
 def redirects():
