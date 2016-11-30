@@ -41,7 +41,6 @@ def register():
 @app.route('/user')
 def user(username = None):
 	con = sql.connect("books.db")
-	username = username
 	cur = con.cursor()
 	for book in books:
 		cur.execute('SELECT title from books WHERE username="%s"' % (username))
@@ -68,16 +67,31 @@ def user(username = None):
 @app.route('/bookmark', methods=['GET', 'POST'])
 def bookmark(username = None):
 	if request.method=='POST':
-		title = request.form['title']
-		author = request.form['author']
-		page = request.form['page']
-		line = request.form['line']
+	username = request.form['username']
+		password = request.form['password']
 		
-		con = sql.connect("books.db")
+		con = sql.connect("users.db")
 		cur = con.cursor()
-		cur.execute("INSERT INTO books (username, title, author, page, line) VALUES (?,?,?,?,?)", (username, title, author, page, line))
+		cur.execute('SELECT username from users WHERE username="%s" AND password="%s"' % (username, password))
+		username = cur.fetchone()
+		
+		con.commit()
+		
+		if cur.fetchone() is not None:
+			title = request.form['title']
+			author = request.form['author']
+			page = request.form['page']
+			line = request.form['line']
+			
+			con = sql.connect("books.db")
+			cur = con.cursor()
+			cur.execute("INSERT INTO books (username, title, author, page, line) VALUES (?,?,?,?,?)", (username, title, author, page, line))
+			con.close()
+			return render_template('user.html', name = name)
+		else:
+			return render_template('bookmark.html')
 		con.close()
-		return render_template('user.html', name = name)
+		
 	else:
 		return render_template('bookmark.html')
 	
