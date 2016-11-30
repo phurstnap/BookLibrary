@@ -67,7 +67,7 @@ def user(username = None):
 @app.route('/bookmark', methods=['GET', 'POST'])
 def bookmark(username = None):
 	if request.method=='POST':
-	username = request.form['username']
+		username = request.form['username']
 		password = request.form['password']
 		
 		con = sql.connect("users.db")
@@ -83,10 +83,10 @@ def bookmark(username = None):
 			page = request.form['page']
 			line = request.form['line']
 			
-			con = sql.connect("books.db")
-			cur = con.cursor()
-			cur.execute("INSERT INTO books (username, title, author, page, line) VALUES (?,?,?,?,?)", (username, title, author, page, line))
-			con.close()
+			conb = sql.connect("books.db")
+			curb = con.cursor()
+			curb.execute("INSERT INTO books (username, title, author, page, line) VALUES (?,?,?,?,?)", (username, title, author, page, line))
+			conb.close()
 			return render_template('user.html', name = name)
 		else:
 			return render_template('bookmark.html')
