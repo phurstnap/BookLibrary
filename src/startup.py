@@ -76,7 +76,6 @@ def bookmark(username = None):
 		password = request.form['password']
 		
 		con = sql.connect("users.db")
-		con.text_factory = str
 		cur = con.cursor()
 		cur.execute('SELECT username from users WHERE username="%s" AND password="%s"' % (username, password))
 		user = cur.fetchone()
@@ -89,7 +88,7 @@ def bookmark(username = None):
 			line = request.form['line']
 			
 			f = request.files['datafile']
-			f.save('static/uploads/' + title + '.png')
+			f.save('static/uploads/' + str(title) + '.png')
 			
 			conb = sql.connect("books.db")
 			curb = conb.cursor()
