@@ -1,10 +1,10 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, session
 import sqlite3 as sql
 app = Flask(__name__)
+app.secret_key = 'rdfgwY#%^yheu56wrg%^u3y5yweryt4w52'
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-	session = None
 	try:
 		if(session['name']):
 			return render_template('user.html', user = name)
