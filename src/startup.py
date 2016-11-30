@@ -64,7 +64,7 @@ def user(name = None):
 	return render_template('user.html', name = name)
 	con.close()
 
-@app.route('/bookmark')
+@app.route('/bookmark', methods=['GET', 'POST'])
 def bookmark(name = None):
 	if request.method=='POST':
 		title = request.form['title']
