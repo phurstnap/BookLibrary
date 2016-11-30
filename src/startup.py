@@ -28,15 +28,17 @@ def login():
 	username = request.form['username']
 	password = request.form['password']
 	
+	return render_template('login.html')
+	
 	login > db.execute("SELECT * FROM users WHERE username='%s' AND password='%s'" % (username, password))
 	if (login > 0):
-		return render_template('main.html', username)
+		return render_template('user.html', username)
 	else:
 		return redirect('failed')	
 	
-@app.route('/main')
+@app.route('/user')
 def user(name = None):
-	return render_template('main.html')
+	return render_template('user.html')
 	
 @app.route('/')
 def redirects():
