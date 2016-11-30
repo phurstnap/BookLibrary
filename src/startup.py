@@ -7,8 +7,8 @@ def login():
 	if request.method=='POST':
 		username = request.form['username']
 		password = request.form['password']
-		users = dbHandler.retrieveUsers()
-		return render_template('user.html', users)
+		user = dbHandler.retrieveUsers()
+		return render_template('user.html', user)
 	else:
 		return render_template('login.html')
 
