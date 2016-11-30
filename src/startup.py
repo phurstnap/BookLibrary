@@ -40,8 +40,30 @@ def register():
 		
 @app.route('/user')
 def user(name = None):
+	con = sql.connect("books.db")
+	cur = con.cursor()
+	for book in books:
+		cur.execute('SELECT title from books WHERE username="%s"' % (username))
+		title = cur.fetchone()
+		cur.execute('SELECT author from books WHERE username="%s"' % (username))
+		author = cur.fetchone()
+		cur.execute('SELECT page from books WHERE username="%s"' % (username))
+		page = cur.fetchone()
+		cur.execute('SELECT line from books WHERE username="%s"' % (username))
+		line = cur.fetchone()
+		code = '''
+				<div class="col-md-4">
+					<form>
+						Title: {{title}}</br>
+						Author: {{author}}</br>
+						Page: {{page}}</br>
+						Line: {{line}}</br>
+					</form>
+				</div>
+		'''
 	return render_template('user.html')
-
+	con.close()
+	
 @app.route('/')
 def redirects():
 	return redirect('login')
