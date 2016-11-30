@@ -76,6 +76,7 @@ def bookmark(username = None):
 		password = request.form['password']
 		
 		con = sql.connect("users.db")
+		con.text_factory = str
 		cur = con.cursor()
 		cur.execute('SELECT username from users WHERE username="%s" AND password="%s"' % (username, password))
 		user = cur.fetchone()
