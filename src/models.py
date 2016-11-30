@@ -10,7 +10,7 @@ def insertUser(username,password):
 def retrieveUsers():
 	con = sql.connect("users.db")
 	cur = con.cursor()
-	cur.execute('SELECT * from users WHERE username="%s" AND password="%s"' % (user, password)
+	cur.execute("SELECT * from users WHERE (username,password) = (?,?)" (username, password)
 	user = cur.fetchone()
 	con.close()
 	return user
