@@ -74,7 +74,7 @@ def bookmark(name = None):
 		
 		con = sql.connect("books.db")
 		cur = con.cursor()
-		cur.execute("INSERT INTO books (title, author, page, line) VALUES (?,?)", (title, author, page, line))
+		cur.execute("INSERT INTO books (title, author, page, line) VALUES (?,?,?,?)", (title, author, page, line))
 		con.close()
 		return render_template('user.html', name = name)
 	else:
