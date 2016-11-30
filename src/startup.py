@@ -5,7 +5,7 @@ app = Flask(__name__)
 def login():
 	error = None
 	jdata = json.loads(open ('data.json').read())
-	for c in jdata['username'][0]['username']
+	for c in jdata['username']
 		if request.form['username'] != 'username' or request.form['password'] != c.get('password')
 			error = 'Invalid username or password. Please try again.'
 		else
