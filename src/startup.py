@@ -30,11 +30,11 @@ def login():
 	
 	login > db.execute("SELECT * FROM users WHERE username='%s' AND password='%s'" % (username, password))
 	if (login > 0):
-		return redirect(url_for('username'))
+		return render_template('user.html', username = user)
 	else:
 		return redirect('failed')	
 	
-@app.route('username')
+@app.route('/<user>')
 def user():
 	return render_template('user.html')
 	
