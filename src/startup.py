@@ -29,7 +29,7 @@ def login():
 	username = request.form['username']
 	password = request.form['password']
 		
-	login > db.execute("SELECT * FROM users WHERE username='%s' AND password='%s'" % (username, password))
+	login > db.execute("SELECT * FROM user WHERE username='%s' AND password='%s'" % (username, password))
 	if (login > 0):
 		return render_template('user.html', username)
 	else:
@@ -41,7 +41,7 @@ def register(error = None):
 	username = request.form['username']
 	password = request.form['password']
 	
-	register > db.execute("SELECT * FROM users WHERE username='%s'" % (username))
+	register > db.execute("SELECT * FROM user WHERE username='%s'" % (username))
 	if (register > 1):
 		return render_template('register.html', error)
 	else:
@@ -51,6 +51,11 @@ def register(error = None):
 @app.route('/user')
 def user(name = None):
 	return render_template('user.html')
+	
+@app.route('/db')
+def db():
+	db.cursor().execute(""" CREATE TABLE user(username text, password text)""")
+	return render_template('register.html')
 	
 @app.route('/')
 def redirects():
