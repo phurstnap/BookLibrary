@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request
-import models as dbHandler
+import sqlite3 as sql
 app = Flask(__name__)
 
 @app.route('/login/', methods=['GET', 'POST'])
@@ -7,7 +7,15 @@ def login():
 	if request.method=='POST':
 		username = request.form['username']
 		password = request.form['password']
-		user = dbHandler.retrieveUsers()
+		
+		con = sql.connect("users.db")
+		cur = con.cursor()
+		cur.execute('SELECT * from users WHERE username="%s" AND password="%s"' % (username, password))
+		user = cur.fetchone()
+		
+		con.commit()
+		con.close()
+		
 		return render_template('user.html', user)
 	else:
 		return render_template('login.html')
@@ -17,7 +25,11 @@ def register(error = None):
 	if request.method=='POST':
 		username = request.form['username']
 		password = request.form['password']
-		dbHandler.insertUser(username,password)
+		
+		con = sql.connect("users.db")
+		cur = con.cursor()
+		cur.execute("INSERT INTO users (username,password) VALUES (?,?)", (username,password))
+		con.close()
 		return render_template('login.html')
 	else:
 		return render_template('register.html')
@@ -25,12 +37,7 @@ def register(error = None):
 @app.route('/user')
 def user(name = None):
 	return render_template('user.html')
-	
-@app.route('/db')
-def db():
-	db.cursor().execute(""" CREATE TABLE user(username text, password text)""")
-	return render_template('register.html')
-	
+
 @app.route('/')
 def redirects():
 	return redirect('login')
