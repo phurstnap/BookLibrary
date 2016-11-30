@@ -149,8 +149,6 @@ def logs(app):
 if __name__ == ("__main__"):
 	init(app)
 	logs(app)
-	app.run
-	(
+	app.run(
 		host=app.config['ip_address'],
-		port=int(app.config['port'])
-	)
+		port=int(app.config['port']))
