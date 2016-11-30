@@ -137,7 +137,7 @@ def init(app):
 	except:
 		print "Could not read from configs at: " + config_location
 
-def logs(app)
+def logs(app):
 	log_pathname = app.config['log_location'] + app.config ['log_file']
 	file_handler = RotatingFileHandler(log_pathname, maxByte = 1024 * 1024 * 10, backupCount = 1024)
 	file_handler.setlevel(app.config['log_level'])
