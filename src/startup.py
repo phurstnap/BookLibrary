@@ -73,8 +73,6 @@ def bookmark(username = None):
 		con = sql.connect("users.db")
 		cur = con.cursor()
 		cur.execute('SELECT username from users WHERE username="%s" AND password="%s"' % (username, password))
-		username = cur.fetchone()
-		
 		con.commit()
 		
 		if cur.fetchone() is not None:
