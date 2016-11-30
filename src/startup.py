@@ -84,7 +84,7 @@ def bookmark(username = None):
 			line = request.form['line']
 			
 			conb = sql.connect("books.db")
-			curb = con.cursor()
+			curb = conb.cursor()
 			curb.execute("INSERT INTO books (username, title, author, page, line) VALUES (?,?,?,?,?)", (username, title, author, page, line))
 			conb.close()
 			return render_template('user.html', name = name)
