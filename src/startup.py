@@ -1,34 +1,28 @@
-from flask import Flask, render_template, redirect, url_for, request, session
+from flask import Flask, render_template, redirect, url_for, request
 import sqlite3 as sql
 app = Flask(__name__)
-app.secret_key = 'rdfgwY#%^yheu56wrg%^u3y5yweryt4w52'
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-	try:
-		if(session['name']):
-			return render_template('user.html', user = name)
+	if request.method=='POST':
+		username = request.form['username']
+		password = request.form['password']
+		
+		con = sql.connect("users.db")
+		cur = con.cursor()
+		cur.execute('SELECT * from users WHERE username="%s" AND password="%s"' % (username, password))
+		user = cur.fetchone()
+		
+		con.commit()
+		con.close()
+		if c.fetchone() is not None:
+			session['name'] = user
+			return render_template('user.html', id=None, user = user, password=None)
 		else:
-			if request.method=='POST':
-				username = request.form['username']
-				password = request.form['password']
-				
-				con = sql.connect("users.db")
-				cur = con.cursor()
-				cur.execute('SELECT * from users WHERE username="%s" AND password="%s"' % (username, password))
-				user = cur.fetchone()
-				
-				con.commit()
-				con.close()
-				if c.fetchone() is not None:
-					session['name'] = user
-					return render_template('user.html', id=None, user = user, password=None)
-				else:
-					return render_template('login.html')
-			else:
-				return render_template('login.html')
-	except KeyError:
-		pass
+			return render_template('login.html')
+	else:
+		return render_template('login.html')
+
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register():
