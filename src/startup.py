@@ -25,11 +25,10 @@ def init_db():
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
+	return render_template('login.html')
 	username = request.form['username']
 	password = request.form['password']
-	
-	return render_template('login.html')
-	
+		
 	login > db.execute("SELECT * FROM users WHERE username='%s' AND password='%s'" % (username, password))
 	if (login > 0):
 		return render_template('user.html', username)
