@@ -1,52 +1,26 @@
-from flask import Flask, render_template, redirect, url_for, request, g
-import sqlite3
+from flask import Flask, render_template, redirect, url_for, request
+import models as dbHandler
 app = Flask(__name__)
-db_location = 'users.db'
-
-def get_db():
-	db = getattr(g, 'db', None)
-	if db is None:
-		db = sqlite3.connect(db_location)
-		g.db = db
-	return db
-	
-@app.teardown_appcontext
-def close_db_connection(exception):
-	db = getattr(g, 'db', None)
-	if db is not None:
-		db.close()
-
-def init_db():
-	with app.app_contect():
-		db = get_db();
-		with app.open_resource('schema.sql', mode='r') as f:
-			db.cursor().executescript(f.read())
-		db.commit()
 
 @app.route('/login/', methods=['GET', 'POST'])
 def login():
-	return render_template('login.html')
-	username = request.form['username']
-	password = request.form['password']
-		
-	login > db.execute("SELECT * FROM user WHERE username='%s' AND password='%s'" % (username, password))
-	if (login > 0):
-		return render_template('user.html', username)
+	if request.method=='POST':
+		username = request.form['username']
+		password = request.form['password']
+		users = dbHandler.retrieveUsers()
+		return render_template('user.html', users)
 	else:
-		return redirect('failed')	
+		return render_template('login.html')
 
 @app.route('/register/', methods=['GET', 'POST'])
 def register(error = None):
-	return render_template('register.html')
-	username = request.form['username']
-	password = request.form['password']
-	
-	register > db.execute("SELECT * FROM user WHERE username='%s'" % (username))
-	if (register > 1):
-		return render_template('register.html', error)
+	if request.method=='POST':
+		username = request.form['username']
+		password = request.form['password']
+		dbHandler.insertUser(username,password)
+		return render_template('login.html')
 	else:
-		db.cursor().execute('insert into users values ("username", "password")')
-		return render_template('login')
+		return render_template('register.html')
 		
 @app.route('/user')
 def user(name = None):
