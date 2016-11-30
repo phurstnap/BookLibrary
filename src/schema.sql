@@ -1,4 +1,4 @@
-DROP TABLE if EXISTS user;
+DROP TABLE if EXISTS users;
 
 CREATE TABLE users (
 	id integer primary key autoincrement,
