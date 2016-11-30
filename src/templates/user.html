@@ -8,12 +8,11 @@
 					<img src="{{ url_for('static', filename='img/new_file.png') }}" alt="New bookmark">
 					<p><a class="btn btn-default" href="{{ url_for('bookmark') }}" role="button">Add a new Bookmark &raquo;</a></p>
 				</div>
+				
+				{{content}}
 
 			</div>
-			
-			<div class="row">
-				{{content}}
-			</div>
+
 		</div> <!-- /container -->
 	</body>
 </html>
