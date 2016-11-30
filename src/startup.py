@@ -10,13 +10,13 @@ def login():
 		
 		con = sql.connect("users.db")
 		cur = con.cursor()
-		cur.execute('SELECT * from users WHERE username="%s" AND password="%s"' % (username, password))
+		cur.execute('SELECT username from users WHERE username="%s" AND password="%s"' % (username, password))
 		user = cur.fetchone()
 		
 		con.commit()
 		
 		if cur.fetchone() is not None:
-			return render_template('user.html', id=None, user = user, password=None)
+			return render_template('user.html',user = user)
 		else:
 			return render_template('login.html')
 		con.close()
