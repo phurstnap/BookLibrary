@@ -3,7 +3,7 @@ app = Flask(__name__)
 db_location = 'users.db'
 
 def get_db():
-	db = getattr(g, 'db, None)
+	db = getattr(g, 'db', None)
 	if db is None:
 		db = sqlite3.connect(db_location)
 		g.db = db
