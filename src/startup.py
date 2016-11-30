@@ -73,6 +73,7 @@ def bookmark(username = None):
 		con = sql.connect("users.db")
 		cur = con.cursor()
 		cur.execute('SELECT username from users WHERE username="%s" AND password="%s"' % (username, password))
+		user = cur.fetchone()
 		con.commit()
 		
 		if cur.fetchone() is not None:
@@ -85,7 +86,7 @@ def bookmark(username = None):
 			curb = conb.cursor()
 			curb.execute("INSERT INTO books (username, title, author, page, line) VALUES (?,?,?,?,?)", (username, title, author, page, line))
 			conb.close()
-			return render_template('user.html', name = name)
+			return render_template('user.html', username = user)
 		else:
 			return render_template('bookmark.html')
 		con.close()
