@@ -16,12 +16,12 @@ def login():
 		con.commit()
 		con.close()
 		
-		return render_template('user.html', user)
+		return render_template('user.html', user, password=None)
 	else:
 		return render_template('login.html')
 
 @app.route('/register/', methods=['GET', 'POST'])
-def register(error = None):
+def register():
 	if request.method=='POST':
 		username = request.form['username']
 		password = request.form['password']
