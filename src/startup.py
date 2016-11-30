@@ -35,7 +35,7 @@ def register(error = None):
 		return render_template('register.html')
 		
 @app.route('/user')
-def user(name = None):
+def user(name = None, password = None):
 	return render_template('user.html')
 
 @app.route('/')
