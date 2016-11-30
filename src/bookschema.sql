@@ -4,6 +4,6 @@ drop table if exists books;
 	username text not null,
 	title text not null,
 	author text not null,
-	page int not null,
-	line int not null
+	page text not null,
+	line text not null
 );
