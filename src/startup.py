@@ -41,6 +41,7 @@ def register():
 @app.route('/user')
 def user(username = None):
 	con = sql.connect("books.db")
+	username = username
 	cur = con.cursor()
 	for book in books:
 		cur.execute('SELECT title from books WHERE username="%s"' % (username))
